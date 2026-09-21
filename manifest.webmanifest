@@ -1,25 +1,11 @@
 {
   "name": "Nivesh",
   "short_name": "Nivesh",
-  "description": "India-focused paper trading for stocks and metals. Demo only - not real money.",
+  "description": "India paper trading for stocks and metals. Demo only.",
   "start_url": "/nivesh-india/",
   "scope": "/nivesh-india/",
   "display": "standalone",
-  "orientation": "portrait-primary",
   "background_color": "#070b14",
   "theme_color": "#0b1220",
-  "icons": [
-    {
-      "src": "icon-192.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-512.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    }
-  ]
+  "icons": [{"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]
 }
