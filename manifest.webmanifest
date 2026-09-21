@@ -1,7 +1,7 @@
 {
   "name": "Nivesh",
   "short_name": "Nivesh",
-  "description": "India-focused paper trading for stocks and metals. Demo only — not real money.",
+  "description": "India-focused paper trading for stocks and metals. Demo only - not real money.",
   "start_url": "/nivesh-india/",
   "scope": "/nivesh-india/",
   "display": "standalone",
