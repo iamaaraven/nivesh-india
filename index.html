@@ -1,32 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/nivesh-india/favicon.svg" />
-    <link rel="manifest" href="/nivesh-india/manifest.webmanifest" />
-    <link rel="apple-touch-icon" href="/nivesh-india/apple-touch-icon.svg" />
-    <link rel="apple-touch-icon" href="/nivesh-india/apple-touch-icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#0b1220" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Nivesh" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta
-      name="description"
-      content="Nivesh — India-focused paper trading for stocks and metals. Demo only."
-    />
-    <title>Nivesh — Stocks &amp; Metals for India</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <script type="module" crossorigin src="/nivesh-india/assets/index-BFHiBktd.js"></script>
-    <link rel="stylesheet" crossorigin href="/nivesh-india/assets/index-DMDRT3hT.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#0b1220"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="Nivesh"/>
+<link rel="manifest" href="manifest.webmanifest"/>
+<link rel="apple-touch-icon" href="icon.svg"/>
+<link rel="icon" href="icon.svg"/>
+<title>Nivesh</title>
+<style>
+body{margin:0;font-family:system-ui,sans-serif;background:#070b14;color:#e8eef9;min-height:100dvh}
+.wrap{max-width:480px;margin:0 auto;padding:16px 16px 80px}
+.badge{display:inline-block;color:#fbbf24;border:1px solid #fbbf2459;background:#fbbf241f;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:700}
+.row{display:flex;justify-content:space-between;padding:12px;border-bottom:1px solid #94a3b81f}
+button{background:#2563eb;color:#fff;border:0;border-radius:12px;padding:12px 16px;font-weight:700;width:100%;margin-top:12px}
+.up{color:#22c55e}.down{color:#f43f5e}
+.nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:#0f1628;border-top:1px solid #94a3b81f}
+.nav button{flex:1;background:transparent;border-radius:0;margin:0}
+.card{background:#121a2e;border-radius:14px;padding:14px;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <div><h1 style="margin:0">Nivesh</h1><div style="color:#8b9bb8;font-size:12px">Stocks & Metals · India</div></div>
+    <span class="badge">PAPER</span>
+  </div>
+  <div class="card"><div style="color:#8b9bb8;font-size:12px">Cash</div><div id="cash" style="font-size:22px;font-weight:700">₹10,00,000</div></div>
+  <div class="card" id="list"></div>
+  <p style="color:#8b9bb8;font-size:12px;line-height:1.5"><strong style="color:#fbbf24">Paper demo only.</strong> Not SEBI-registered. Not real money. Share this link or Add to Home Screen.</p>
+</div>
+<script>
+const items=[
+{s:'RELIANCE',p:2950},{s:'TCS',p:4120},{s:'INFY',p:1885},{s:'HDFCBANK',p:1680},
+{s:'GOLD',p:72500},{s:'SILVER',p:86500},{s:'COPPER',p:820},{s:'CRUDEOIL',p:6250}
+].map(x=>({...x,ltp:x.p,chg:0}));
+let cash=1000000, hold={};
+const inr=n=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(n);
+function render(){
+ document.getElementById('cash').textContent=inr(cash);
+ document.getElementById('list').innerHTML='<div style="font-weight:700;margin-bottom:8px">Watchlist</div>'+items.map((x,i)=>`<div class="row"><div><b>${x.s}</b><div style="font-size:12px;color:#8b9bb8">${inr(x.ltp)}</div></div><div><span class="${x.chg>=0?'up':'down'}">${x.chg>=0?'+':''}${x.chg}%</span><br/><button style="width:auto;padding:6px 10px;margin:4px 0 0" onclick="buy(${i})">Buy 1</button></div></div>`).join('');
+}
+function buy(i){const x=items[i];if(x.ltp>cash){alert('Not enough cash');return;}cash-=x.ltp;hold[x.s]=(hold[x.s]||0)+1;alert('Bought 1 '+x.s);render();}
+setInterval(()=>{items.forEach(x=>{const d=(Math.random()-0.5)*0.006;x.ltp=Math.max(1,+(x.ltp*(1+d)).toFixed(2));x.chg=+(((x.ltp-x.p)/x.p)*100).toFixed(2)});render()},2500);
+render();
+</script>
+</body>
 </html>
