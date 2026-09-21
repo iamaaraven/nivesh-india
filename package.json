@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prebuild": "node scripts/decode-icons.mjs",
+    "predev": "node scripts/decode-icons.mjs"
   },
   "dependencies": {
     "react": "^19.2.8",
@@ -22,5 +24,5 @@
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
   },
-  "description": "Nivesh — India-focused paper trading for stocks and metals (demo MVP)"
+  "description": "Nivesh - India-focused paper trading for stocks and metals (demo MVP)"
 }
